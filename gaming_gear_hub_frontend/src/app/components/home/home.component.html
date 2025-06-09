@@ -1,0 +1,43 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Elevate Your Game</h1>
+      <p class="hero-subtitle">Discover premium gaming gear for the ultimate experience</p>
+      <button (click)="scrollToCategories()" class="btn btn-outline hero-scroll">
+        <span>Explore</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section #categoriesSection class="section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2>Gaming Categories</h2>
+      <p>Explore our premium selection of gaming gear</p>
+    </div>
+    <div class="grid">
+      <div class="card category-card" *ngFor="let category of categories" (click)="navigateToCategory(category.id)">
+        <div class="card-bg">
+          <div class="category-image" [style.background-image]="'url(' + category.backgroundImage + ')'"></div>
+        </div>
+        <div class="card-content">
+          <h3>{{category.name}}</h3>
+          <p class="description">{{category.description}}</p>
+          <button class="btn btn-text" (click)="$event.stopPropagation(); navigateToCategory(category.id)">
+            <span>Shop Now</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

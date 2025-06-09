@@ -1,0 +1,56 @@
+<div class="category-container">
+  <div class="category-header">
+    <h1>{{categoryName}}</h1>
+    <p>Discover our premium selection of {{categoryName.toLowerCase()}} designed for gamers who demand the best performance and quality.</p>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.image" [alt]="product.name" loading="lazy">
+        <span class="product-tag" *ngIf="product.discount && product.discount > 0">
+          {{product.discount}}% OFF
+        </span>
+      </div>
+      
+      <div class="product-info">
+        <h3>{{product.name}}</h3>
+        <p class="description">
+          {{product.description || 'High-performance gaming ' + categoryName.toLowerCase().replace('gaming ', '') + ' for professional and casual gamers.'}}
+        </p>
+        
+        <div class="price-container">
+          <div class="price">
+            ${{product.price - ((product.discount || 0) ? (product.price * (product.discount || 0) / 100) : 0) | number:'1.2-2'}}
+            <span class="original-price" *ngIf="product.discount && product.discount > 0">
+              ${{product.price | number:'1.2-2'}}
+            </span>
+            <span class="discount" *ngIf="product.discount && product.discount > 0">
+              Save {{product.discount}}%
+            </span>
+          </div>
+        </div>
+        
+        <div class="product-cta">
+          <button class="btn btn-primary" (click)="addToCart(product)">
+            <mat-icon>shopping_cart</mat-icon>
+            Add to Cart
+          </button>
+          <button class="btn btn-secondary" (click)="viewDetails(product)">
+            <mat-icon>visibility</mat-icon>
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-products" *ngIf="products.length === 0">
+      <h3>No Products Found</h3>
+      <p>We couldn't find any products in this category. Please check back later or explore our other categories.</p>
+      <button class="btn" routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Home
+      </button>
+    </div>
+  </div>
+</div>

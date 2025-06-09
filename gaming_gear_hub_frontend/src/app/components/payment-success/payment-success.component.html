@@ -1,0 +1,44 @@
+<div class="payment-success-container">
+  <mat-card class="success-card">
+    <div class="success-icon">
+      <mat-icon color="primary" class="large-icon">check_circle</mat-icon>
+    </div>
+    
+    <mat-card-header>
+      <mat-card-title>Payment Successful!</mat-card-title>
+      <mat-card-subtitle>Thank you for your purchase</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="payment-details">
+        <div class="detail-row">
+          <span class="label">Order ID:</span>
+          <span class="value">{{paymentDetails.orderId}}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Payment ID:</span>
+          <span class="value">{{paymentDetails.paymentId}}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Amount Paid:</span>
+          <span class="value">₹{{paymentDetails.amount}}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Status:</span>
+          <span class="value success">{{paymentDetails.status}}</span>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goToOrders()">
+        <mat-icon>list_alt</mat-icon>
+        View Orders
+      </button>
+      <button mat-raised-button color="accent" (click)="continueShopping()">
+        <mat-icon>shopping_cart</mat-icon>
+        Continue Shopping
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

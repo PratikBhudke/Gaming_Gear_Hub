@@ -1,0 +1,204 @@
+// Colors
+$primary: #3f51b5;
+$text-primary: #212121;
+$text-secondary: #757575;
+$background: #f5f7fa;
+$card-bg: #ffffff;
+$border: #e0e0e0;
+$success: #4caf50;
+$error: #f44336;
+$warning: #ff9800;
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+$font-size-base: 14px;
+$line-height: 1.5;
+
+.users-container {
+  padding: 2rem;
+  padding-top: 6rem; // Account for fixed header
+  background: $background;
+  min-height: 100vh;
+  color: $text-primary;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height;
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 1.75rem;
+    color: $primary;
+    margin: 0 0 2rem 0;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  mat-card {
+    background: $card-bg;
+    border: 1px solid $border;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 0 0 1.5rem 0;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    padding-top: 5rem;
+    
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+    
+    .mat-mdc-cell,
+    .mat-mdc-header-cell {
+      padding: 0.75rem 0.5rem;
+    }
+  }
+}
+
+.users-table {
+  width: 100%;
+  background: $card-bg;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: none;
+
+  .mat-mdc-header-cell {
+    background: lighten($background, 2%);
+    color: $text-primary;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    padding: 1rem;
+    border-bottom: 1px solid $border;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mat-mdc-cell {
+    color: $text-primary;
+    padding: 1rem;
+    border-bottom: 1px solid rgba($border, 0.5);
+    font-size: 0.9375rem;
+    vertical-align: middle;
+  }
+
+  .mat-mdc-form-field {
+    width: 180px;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+
+    ::ng-deep {
+      .mat-mdc-form-field-flex {
+        background-color: $card-bg;
+        padding: 0 0.75rem;
+      }
+
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        border-color: $border;
+      }
+      
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+      .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+        border-color: $primary;
+      }
+
+      .mat-mdc-select-value-text {
+        color: $text-primary;
+      }
+
+      .mat-mdc-select-arrow {
+        color: $text-secondary;
+      }
+      
+      .mat-mdc-form-field-underline {
+        display: none;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .mat-column-actions {
+    width: 120px;
+    text-align: center;
+  }
+
+  .mat-column-role {
+    width: 150px;
+  }
+
+  mat-paginator {
+    margin-top: 20px;
+  }
+
+  button {
+    &.mat-primary {
+      color: #00ff88;
+    }
+
+    &.mat-warn {
+      color: #ff4444;
+
+      &:disabled {
+        color: rgba(255, 68, 68, 0.3);
+      }
+    }
+
+    mat-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-mdc-paginator {
+    background: transparent;
+    color: white;
+
+    .mat-mdc-paginator-container {
+      color: white;
+    }
+
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-paginator-page-size-label {
+      color: #888;
+    }
+
+    .mat-mdc-paginator-navigation-previous,
+    .mat-mdc-paginator-navigation-next {
+      color: #00ff88;
+    }
+  }
+
+  .mat-mdc-select-panel {
+    background: #2d2d2d;
+  }
+
+  .mat-mdc-option {
+    color: white;
+
+    &:hover:not(.mat-mdc-option-disabled) {
+      background: rgba(0, 255, 136, 0.1);
+    }
+
+    &.mat-mdc-option-active {
+      background: rgba(0, 255, 136, 0.2);
+    }
+
+    .mat-mdc-option-text {
+      color: white;
+    }
+  }
+}

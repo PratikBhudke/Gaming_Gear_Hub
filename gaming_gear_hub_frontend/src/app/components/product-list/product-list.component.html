@@ -1,0 +1,56 @@
+<div class="product-list-container">
+  <!-- Category Header -->
+  <div class="category-header">
+    <h1>{{ categoryName }}</h1>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loader"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid" *ngIf="!loading">
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="products.length === 0">
+      <i class="fas fa-box-open"></i>
+      <h2>No products found</h2>
+      <p>We couldn't find any products in this category.</p>
+    </div>
+
+    <!-- Product Cards -->
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <div class="stock-badge" [class.low-stock]="product.stock < 5">
+          {{ product.stock > 0 ? (product.stock < 5 ? 'Low Stock' : 'In Stock') : 'Out of Stock' }}
+        </div>
+      </div>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <div class="rating">
+          <div class="stars">
+            <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]"
+               [class.filled]="star <= product.rating"
+               [class.half-filled]="star - 0.5 <= product.rating && star > product.rating"></i>
+          </div>
+          <span class="rating-value">{{ product.rating }}</span>
+        </div>
+        <p class="description">{{ product.description }}</p>
+        <div class="price-cart">
+          <span class="price">₹{{ product.price.toFixed(2) }}</span>
+          <button class="add-to-cart" 
+                  (click)="addToCart(product)"
+                  [disabled]="addingToCart[product.id] || product.stock === 0">
+            <div class="loader" *ngIf="addingToCart[product.id]"></div>
+            <ng-container *ngIf="!addingToCart[product.id]">
+              <i class="fas fa-shopping-cart"></i>
+              {{ product.stock === 0 ? 'Out of Stock' : 'Add to Cart' }}
+            </ng-container>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

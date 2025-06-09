@@ -1,0 +1,17 @@
+<div class="app-container">
+  <!-- Main Navbar - Only show if not in admin mode -->
+  <app-navbar *ngIf="showNavbarAndFooter" class="nav-container"></app-navbar>
+  
+  <!-- Admin Navbar - Only show in admin mode and user is admin -->
+  <app-admin-navbar *ngIf="!showNavbarAndFooter && isUserAdmin()"></app-admin-navbar>
+  
+  <!-- Main Content -->
+  <main class="main-content" [class.admin-mode]="!showNavbarAndFooter">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  
+  <!-- Footer - Only show if not in admin mode -->
+  <app-footer *ngIf="showNavbarAndFooter"></app-footer>
+</div>

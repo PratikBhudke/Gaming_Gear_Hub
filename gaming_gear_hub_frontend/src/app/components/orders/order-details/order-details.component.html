@@ -1,0 +1,103 @@
+<div class="order-details-container">
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error && !loading" class="error-message">
+    <p>{{ error }}</p>
+    <button mat-raised-button color="primary" routerLink="/orders">Back to Orders</button>
+  </div>
+
+  <!-- Order details -->
+  <div *ngIf="!loading && !error && order" class="order-details">
+    <div class="order-header">
+      <h1>Order Details</h1>
+      <button mat-raised-button color="primary" routerLink="/orders">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Orders
+      </button>
+    </div>
+
+    <mat-card class="order-info">
+      <mat-card-content>
+        <!-- Order Summary -->
+        <div class="info-section">
+          <h2>Order Summary</h2>
+          <div class="info-row">
+            <span class="label">Order ID:</span>
+            <span class="value">#{{ order.id }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Order Date:</span>
+            <span class="value">{{ formatDate(order.orderDate) }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Status:</span>
+            <span class="value status-chip" [ngClass]="getStatusClass(order.status)">
+              {{ order.status }}
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="label">Payment Status:</span>
+            <span class="value">{{ order.paymentStatus }}</span>
+          </div>
+          <!-- Razorpay Details -->
+          <div class="payment-row" *ngIf="order.razorpayOrderId">
+            <span class="label">Razorpay Order ID:</span>
+            <span class="value">{{ order.razorpayOrderId }}</span>
+          </div>
+          <div class="payment-row" *ngIf="order.razorpayPaymentId">
+            <span class="label">Razorpay Payment ID:</span>
+            <span class="value">{{ order.razorpayPaymentId }}</span>
+          </div>
+        </div>
+
+        <!-- Shipping Details -->
+        <div class="info-section">
+          <h2>Shipping Details</h2>
+          <div class="info-row">
+            <span class="label">Shipping Address:</span>
+            <span class="value">{{ order.shippingAddress }}</span>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="info-section">
+          <h2>Order Items</h2>
+          <div *ngFor="let item of order.orderItems" class="order-item">
+            <div class="item-details">
+              <img [src]="item.product.imageUrl" [alt]="item.product.name" class="product-image">
+              <div class="product-info">
+                <h3>{{ item.product.name }}</h3>
+                <p class="price">₹{{ item.price | number:'1.2-2' }}</p>
+                <p class="quantity">Quantity: {{ item.quantity }}</p>
+              </div>
+            </div>
+            <div class="item-total">
+              ₹{{ item.price * item.quantity | number:'1.2-2' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="info-section order-summary">
+          <h2>Order Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>₹{{ order.totalAmount | number:'1.2-2' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>₹{{ order.totalAmount | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

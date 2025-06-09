@@ -1,0 +1,122 @@
+<footer class="footer">
+  
+  <!-- Newsletter Section -->
+  <!-- <div class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <h3>Join Our Gaming Community</h3>
+        <p>Subscribe to get exclusive offers, gaming tips, and early access to new products</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="footer-container">
+    <!-- Brand and Contact Info -->
+    <div class="footer-brand">
+      <a routerLink="/" class="logo">
+        <fa-icon [icon]="faGamepad"></fa-icon>
+        <span>Gaming Gear Hub</span>
+      </a>
+  
+      <div class="contact-info">
+        <p><fa-icon [icon]="faEnvelope"></fa-icon> support&#64;gaminggearhub.com</p>
+        <p><fa-icon [icon]="faPhone"></fa-icon> +1 (555) 123-4567</p>
+        <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> 123 Gaming St, Tech City, TC 12345</p>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook" class="social-icon"><fa-icon [icon]="faFacebook"></fa-icon></a>
+        <a href="#" aria-label="Twitter" class="social-icon"><fa-icon [icon]="faTwitter"></fa-icon></a>
+        <a href="#" aria-label="Instagram" class="social-icon"><fa-icon [icon]="faInstagram"></fa-icon></a>
+        <a href="#" aria-label="Discord" class="social-icon"><fa-icon [icon]="faDiscord"></fa-icon></a>
+        <a href="#" aria-label="YouTube" class="social-icon"><fa-icon [icon]="faYoutube"></fa-icon></a>
+        <a href="#" aria-label="Twitch" class="social-icon"><fa-icon [icon]="faTwitch"></fa-icon></a>
+      </div>
+    </div>
+
+    <!-- Link Groups -->
+    <div class="link-group">
+      <h4>Shop</h4>
+      <ul>
+        <li><a routerLink="/products">All Products</a></li>
+        <li><a routerLink="/products/keyboards">Mechanical Keyboards</a></li>
+        <li><a routerLink="/products/mice">Gaming Mice</a></li>
+        <li><a routerLink="/products/headsets">Gaming Headsets</a></li>
+        <li><a routerLink="/products/monitors">Gaming Monitors</a></li>
+        <li><a routerLink="/products/controllers">Controllers</a></li>
+        <li><a routerLink="/products/accessories">Accessories</a></li>
+      </ul>
+    </div>
+
+    <div class="link-group">
+      <h4>Support</h4>
+      <ul>
+        <li><a routerLink="/contact">Contact Us</a></li>
+        <li><a routerLink="/faq">FAQs</a></li>
+        <li><a routerLink="/shipping">Shipping & Delivery</a></li>
+        <li><a routerLink="/returns">Returns & Exchanges</a></li>
+        <li><a routerLink="/warranty">Warranty</a></li>
+        <li><a routerLink="/size-guide">Size Guide</a></li>
+      </ul>
+    </div>
+
+    <div class="link-group">
+      <h4>Company</h4>
+      <ul>
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/blog">Blog</a></li>
+        <li><a routerLink="/careers">Careers</a></li>
+        <li><a routerLink="/press">Press</a></li>
+        <li><a routerLink="/affiliates">Affiliates</a></li>
+        <li><a routerLink="/wholesale">Wholesale</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Payment Methods -->
+  <div class="payment-methods">
+    <div class="payment-method visa">
+      <fa-icon [icon]="faCcVisa" size="2x"></fa-icon>
+    </div>
+    <div class="payment-method mastercard">
+      <fa-icon [icon]="faCcMastercard" size="2x"></fa-icon>
+    </div>
+    <div class="payment-method amex">
+      <fa-icon [icon]="faCcAmex" size="2x"></fa-icon>
+    </div>
+    <div class="payment-method apple-pay">
+      <fa-icon [icon]="faCcApplePay" size="2x"></fa-icon>
+    </div>
+    <div class="payment-method paypal">
+      <fa-icon [icon]="faCcPaypal" size="2x"></fa-icon>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="copyright">
+        &copy; {{ currentYear }} Gaming Gear Hub. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a routerLink="/privacy">Privacy Policy</a>
+        <a routerLink="/terms">Terms of Service</a>
+        <a routerLink="/cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button 
+    #backToTop 
+    class="back-to-top" 
+    [class.visible]="showBackToTop"
+    (click)="scrollToTop()"
+    aria-label="Back to top"
+  >
+    <fa-icon [icon]="faArrowUp"></fa-icon>
+  </button>
+</footer>

@@ -1,0 +1,124 @@
+<div class="orders-container">
+  <div class="orders-header">
+    <div class="header-content">
+      <h1>Order History</h1>
+      <p class="subtitle">View and manage your recent purchases</p>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading-state">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Loading your orders...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error && !loading" class="error-state">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3>Something went wrong</h3>
+    <p class="error-message">{{ error }}</p>
+    <button mat-flat-button color="primary" (click)="loadOrders()" class="retry-button">
+      <mat-icon>refresh</mat-icon>
+      Try Again
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && !error && !hasOrders()" class="empty-state">
+    <div class="empty-content">
+      <mat-icon class="empty-icon">shopping_bag</mat-icon>
+      <h3>No Orders Yet</h3>
+      <p>You haven't placed any orders yet. Start shopping to see your orders here.</p>
+      <button mat-flat-button color="primary" routerLink="/home" class="shop-now-button">
+        <mat-icon>shopping_cart</mat-icon>
+        Start Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- Orders list -->
+  <div *ngIf="!loading && !error && hasOrders()" class="orders-list">
+    <div class="orders-summary">
+      <div class="summary-item">
+        <span class="label">Total Orders</span>
+        <span class="value">{{ orders.totalElements }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">This Month</span>
+        <span class="value">{{ getThisMonthOrdersCount() }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Total Amount</span>
+        <span class="value">${{ getTotalAmount() | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="order-cards">
+      <ng-container *ngIf="orders?.content && orders.content.length > 0; else noOrders">
+        <mat-card *ngFor="let order of orders.content" class="order-card">
+          <div class="order-header">
+            <div class="order-info">
+              <h3>Order #{{ order?.id || 'N/A' }}</h3>
+              <div class="order-date" *ngIf="order?.orderDate">
+                Placed on {{ formatDate(order.orderDate) }}
+              </div>
+            </div>
+            <div class="order-status" *ngIf="order?.status">
+              <span class="status-badge" [ngClass]="'status-' + (order.status || '').toLowerCase()">
+                {{ order.status }}
+              </span>
+            </div>
+          </div>
+
+          <div class="order-details">
+            <div class="detail-item">
+              <mat-icon>person</mat-icon>
+              <span>{{ order?.user?.name || 'Guest' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>payment</mat-icon>
+              <span>${{ order?.totalAmount | number:'1.2-2' }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>local_shipping</mat-icon>
+              <span>{{ order?.shippingAddress || 'No shipping address provided' }}</span>
+            </div>
+          </div>
+
+          <div class="order-actions">
+            <button mat-stroked-button color="primary" [routerLink]="['/orders', order?.id]" [disabled]="!order?.id">
+              <mat-icon>visibility</mat-icon>
+              View Details
+            </button>
+            <button mat-stroked-button color="primary" *ngIf="order && canCancelOrder(order)">
+              <mat-icon>cancel</mat-icon>
+              Cancel Order
+            </button>
+          </div>
+        </mat-card>
+      </ng-container>
+
+      <ng-template #noOrders>
+        <div class="empty-state">
+          <mat-icon class="empty-icon">shopping_bag</mat-icon>
+          <h3>No Orders Found</h3>
+          <p>You haven't placed any orders yet. Start shopping to see your orders here!</p>
+          <button mat-raised-button color="primary" routerLink="/products" class="shop-now-button">
+            <mat-icon>shopping_cart</mat-icon>
+            Shop Now
+          </button>
+        </div>
+      </ng-template>
+    </div>
+
+    <mat-paginator *ngIf="orders?.totalElements && orders.totalElements > pageSize"
+                  [length]="orders.totalElements"
+                  [pageSize]="pageSize"
+                  [pageIndex]="currentPage"
+                  (page)="onPageChange($event)"
+                  [pageSizeOptions]="[5, 10, 25, 50]"
+                  showFirstLastButtons
+                  aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

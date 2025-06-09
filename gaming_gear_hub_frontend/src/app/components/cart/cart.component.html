@@ -1,0 +1,144 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <div class="header-content">
+      <h1><mat-icon class="header-icon">shopping_cart</mat-icon> Your Gaming Arsenal</h1>
+      <p class="subtitle">Review and manage your selected gaming gear</p>
+    </div>
+    <button *ngIf="cart?.items?.length" mat-stroked-button color="warn" class="clear-cart-btn" (click)="clearCart()">
+      <mat-icon>delete_sweep</mat-icon>
+      Clear All
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading your gaming gear...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3>Oops! Something went wrong</h3>
+    <p class="error-message">{{error}}</p>
+    <button mat-raised-button color="primary" class="retry-btn" (click)="loadCart()">
+      <mat-icon>refresh</mat-icon>
+      Try Again
+    </button>
+  </div>
+
+  <!-- Empty Cart -->
+  <div *ngIf="!cart?.items?.length" class="empty-cart">
+    <mat-icon class="empty-icon">sports_esports</mat-icon>
+    <h3>Your Gaming Arsenal is Empty!</h3>
+    <p>Level up your setup with some epic gaming gear!</p>
+    <button mat-raised-button color="primary" class="shop-now-btn" routerLink="/products">
+      <mat-icon>shopping_bag</mat-icon>
+      Browse Gaming Gear
+    </button>
+  </div>
+
+  <!-- Cart Content -->
+  <div *ngIf="!loading && !error && cart?.items?.length" class="cart-content">
+    <!-- Cart Items -->
+    <div class="cart-items">
+      <mat-card *ngFor="let item of cart?.items || []; trackBy: trackByItemId" class="cart-item">
+        <div class="item-image">
+          <img [src]="item.imageUrl" [alt]="item.productName" class="product-image">
+          <div class="item-badge" *ngIf="item.quantity > 1">x{{item.quantity}}</div>
+        </div>
+        
+        <div class="item-details">
+          <div class="item-header">
+            <h3 class="item-name">{{item.productName}}</h3>
+            <button mat-icon-button color="warn" class="remove-btn" (click)="removeItem(item.productId)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          
+          <div class="item-meta">
+            <div class="item-price">
+              <span class="label">Price:</span>
+              <span class="value">₹{{item.price | number:'1.2-2'}}</span>
+            </div>
+            
+            <div class="item-quantity">
+              <span class="label">Quantity:</span>
+              <div class="quantity-controls">
+                <button mat-icon-button [disabled]="loading || item.quantity <= 1" 
+                        (click)="updateQuantity(item.productId, item.quantity - 1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="quantity">{{item.quantity}}</span>
+                <button mat-icon-button [disabled]="loading" 
+                        (click)="updateQuantity(item.productId, item.quantity + 1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            <div class="item-total">
+              <span class="label">Total:</span>
+              <span class="value">₹{{item.subtotal | number:'1.2-2'}}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+      <mat-card class="summary-card">
+        <h2 class="summary-title">Order Summary</h2>
+        
+        <div class="summary-items">
+          <div class="summary-row">
+            <span>Subtotal ({{getItemCount()}} items)</span>
+            <span class="price">${{getSubtotal() | number:'1.2-2'}}</span>
+          </div>
+          
+          <div class="summary-item shipping">
+            <span class="label">Shipping</span>
+            <span class="value" [class.free]="getShippingFee() === 0">
+              {{getShippingFee() === 0 ? 'FREE' : (getShippingFee() | currency:'INR')}}
+            </span>
+          </div>
+          
+          <mat-divider></mat-divider>
+          
+          <div class="summary-item total">
+            <span class="label">Total</span>
+            <span class="value total-amount">{{getTotal() | currency:'INR'}}</span>
+          </div>
+          
+          <div *ngIf="getSubtotal() < FREE_SHIPPING_THRESHOLD" class="free-shipping-message">
+            <mat-icon>local_shipping</mat-icon>
+            <span>Add ₹{{FREE_SHIPPING_THRESHOLD - getSubtotal() | number:'1.0-0'}} more for FREE shipping!</span>
+          </div>
+          
+          <button mat-raised-button color="primary" class="checkout-btn" (click)="checkout()" [disabled]="!cart?.items?.length">
+            <mat-icon>lock</mat-icon>
+            Proceed to Checkout
+          </button>
+          
+          <div class="secure-payment">
+            <mat-icon>lock</mat-icon>
+            <span>Secure Payment</span>
+            <div class="payment-methods">
+              <mat-icon svgIcon="visa"></mat-icon>
+              <mat-icon svgIcon="mastercard"></mat-icon>
+              <mat-icon svgIcon="paypal"></mat-icon>
+              <mat-icon>account_balance</mat-icon>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- Security Badge -->
+<div class="security-badge" *ngIf="!loading && !error && cart?.items?.length">
+  <i class="fas fa-lock"></i>
+  <p>Secure Checkout | SSL Protected</p>
+</div>

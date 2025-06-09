@@ -1,0 +1,207 @@
+// Custom variables for the login component
+$primary-color: #3f51b5;
+$secondary-color: #2196f3;
+$text-color: #333;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #666;
+$white: #fff;
+
+// Breakpoints
+$mobile-breakpoint: 600px;
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Account for navbar height */
+  padding: 4rem 2rem 2rem; /* Add top padding to prevent navbar overlap */
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background-image: url('https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  position: relative;
+  z-index: 1;
+
+  .login-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+
+    mat-card-header {
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      color: $white;
+      padding: 1.5rem;
+      text-align: center;
+
+      mat-card-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 0;
+      }
+    }
+
+    mat-card-content {
+      padding: 2rem;
+
+      .login-type-selector {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        button {
+          flex: 1;
+          padding: 0.8rem;
+          border-radius: 8px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          background: $light-gray;
+          color: $text-color;
+          border: 2px solid transparent;
+
+          &.active {
+            background: $primary-color;
+            color: $white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+          }
+
+          &:hover:not(.active) {
+            background: $medium-gray;
+          }
+        }
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        mat-form-field {
+          width: 100%;
+
+          ::ng-deep {
+            .mat-form-field-outline {
+              color: $medium-gray;
+            }
+            .mat-form-field-outline-thick {
+              color: $primary-color;
+            }
+            .mat-form-field-label {
+              color: $dark-gray;
+            }
+            .mat-input-element {
+              color: $text-color;
+              font-size: 1rem;
+              padding: 0.5rem 0;
+            }
+          }
+        }
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+
+        mat-checkbox {
+          color: darken($dark-gray, 10%);
+        }
+
+        .forgot-password {
+          color: $primary-color;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.2s;
+
+          &:hover {
+            color: darken($primary-color, 15%);
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        button {
+          padding: 0.8rem 1.5rem;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+
+          &[color='primary'] {
+            background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+            color: $white;
+
+            &:hover:not(:disabled) {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 15px rgba($primary-color, 0.4);
+            }
+
+            &:disabled {
+              background: lighten($medium-gray, 10%);
+            }
+          }
+
+          &[mat-stroked-button] {
+            border: 2px solid $primary-color;
+            color: $primary-color;
+
+            &:hover {
+              background: rgba($primary-color, 0.1);
+              transform: translateY(-2px);
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $mobile-breakpoint) {
+  .login-container {
+    padding: 5rem 1rem 2rem; /* Adjust padding for mobile */
+    min-height: calc(100vh - 56px); /* Adjust for mobile navbar height */
+    
+    .login-card {
+      mat-card-header mat-card-title {
+        font-size: 1.5rem;
+      }
+      
+      mat-card-content {
+        padding: 1.5rem;
+        
+        .login-type-selector {
+          flex-direction: column;
+          gap: 0.75rem;
+          
+          button {
+            padding: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+}

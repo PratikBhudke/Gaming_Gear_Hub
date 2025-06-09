@@ -1,0 +1,85 @@
+<nav class="admin-navbar">
+  <div class="admin-navbar-container">
+    <!-- Logo and Brand -->
+    <div class="admin-brand">
+      <a routerLink="/admin" class="admin-logo">
+        <span>Admin Panel</span>
+      </a>
+    </div>
+
+    <!-- Main Navigation -->
+    <ul class="admin-nav-links">
+      <li [class.active]="isActive('/admin/dashboard')">
+        <a routerLink="/admin/dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li [class.active]="isActive('/admin/products')">
+        <a routerLink="/admin/products">
+          <i class="fas fa-box"></i>
+          <span>Products</span>
+        </a>
+      </li>
+      <!-- <li [class.active]="isActive('/admin/orders')">
+        <a routerLink="/admin/orders">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Orders</span>
+        </a>
+      </li> -->
+      <li [class.active]="isActive('/admin/users')">
+        <a routerLink="/admin/users">
+          <i class="fas fa-users"></i>
+          <span>Users</span>
+        </a>
+      </li>
+      <!-- <li [class.active]="isActive('/admin/categories')">
+        <a routerLink="/admin/categories">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+      </li> -->
+    </ul>
+
+    <!-- Right Side -->
+    <div class="admin-nav-right">
+      <!-- User Menu -->
+      <div class="admin-user-menu">
+        <button class="admin-user-button" (click)="toggleUserMenu()">
+          <div class="admin-avatar">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <span class="admin-username">{{ userName || 'Admin' }}</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div class="admin-dropdown" [class.show]="showUserMenu">
+          <div class="admin-dropdown-header">
+            <div class="admin-avatar">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="admin-user-info">
+              <div class="admin-user-name">{{ userName || 'Admin User' }}</div>
+              <div class="admin-user-email">{{ userEmail || 'admin@example.com' }}</div>
+            </div>
+          </div>
+          <div class="admin-dropdown-divider"></div>
+          <a routerLink="/admin/profile" class="admin-dropdown-item">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile Settings</span>
+          </a>
+          <a routerLink="/" class="admin-dropdown-item">
+            <i class="fas fa-store"></i>
+            <span>View Store</span>
+          </a>
+          <div class="admin-dropdown-divider"></div>
+          <a (click)="onLogout()" class="admin-dropdown-item logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

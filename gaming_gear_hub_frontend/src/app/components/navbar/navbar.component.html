@@ -1,0 +1,140 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-logo">
+      <span class="logo-text">GamingGear</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <ul class="nav-links">
+        <li *ngFor="let link of mainNavLinks">
+          <a [routerLink]="link.route" routerLinkActive="active">
+            <i [class]="link.icon"></i>
+            <span>{{ link.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Side Navigation -->
+    <div class="right-nav">
+      <!-- Search Bar -->
+      <div class="search-container" [class.active]="searchActive">
+        <button class="search-button" (click)="toggleSearch()" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <div class="search-bar">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+            placeholder="Search games, gear..."
+            aria-label="Search games and gear"
+          />
+          <button class="search-submit" (click)="onSearch()" aria-label="Submit search">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Buttons - Shown when user is not logged in -->
+      <div class="auth-buttons" *ngIf="!isLoggedIn">
+        <a routerLink="/auth/login" class="login-button">Login</a>
+        <a routerLink="/auth/register" class="signup-button">Sign Up</a>
+      </div>
+
+      <!-- User Menu - Shown when user is logged in -->
+      <div class="user-menu" *ngIf="isLoggedIn">
+        <button class="profile-button" (click)="toggleProfileMenu()" aria-label="User menu">
+          <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <span class="user-name">{{ userName || 'My Account' }}</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+        
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown" [class.show]="showProfileMenu">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+              <div class="profile-name">{{ userName || 'My Account' }}</div>
+              <div class="profile-email">View profile</div>
+            </div>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <div class="dropdown-links">
+            <a routerLink="/account" class="dropdown-item">
+              <i class="fas fa-user"></i>
+              <span>My Profile</span>
+            </a>
+            <a routerLink="/orders" class="dropdown-item">
+              <i class="fas fa-box"></i>
+              <span>My Orders</span>
+            </a>
+            <a routerLink="/wishlist" class="dropdown-item">
+              <i class="fas fa-heart"></i>
+              <span>Wishlist</span>
+            </a>
+            <a routerLink="/settings" class="dropdown-item">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <div class="dropdown-actions">
+            <a (click)="logout()" class="sign-out-button">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart -->
+      <a routerLink="/cart" class="cart-button" aria-label="Shopping cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.active]="mobileMenuOpen">
+    <div class="mobile-menu-header">
+      <div class="profile-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">{{ isLoggedIn ? userName : 'Guest' }}</div>
+        <div class="profile-email">{{ isLoggedIn ? 'View Account' : 'Sign in to your account' }}</div>
+      </div>
+    </div>
+    
+    <div class="mobile-menu-links">
+      <a *ngFor="let link of mobileNavLinks" [routerLink]="link.route" (click)="mobileMenuOpen = false">
+        <i [class]="link.icon"></i>
+        <span>{{ link.label }}</span>
+      </a>
+      
+      <div class="mobile-menu-actions">
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="sign-in-button" (click)="mobileMenuOpen = false">Sign In</a>
+        <a *ngIf="isLoggedIn" (click)="logout()" class="sign-out-button">Sign Out</a>
+      </div>
+    </div>
+  </div>
+</nav>

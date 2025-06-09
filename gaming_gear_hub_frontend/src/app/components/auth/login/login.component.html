@@ -1,0 +1,56 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>WELCOME BACK !!!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="login-type-selector">
+          <button mat-raised-button [class.active]="selectedTabIndex === 0" (click)="onTabChange(0)" type="button">
+            <mat-icon>person</mat-icon>
+            USER LOGIN
+          </button>
+          <button mat-raised-button [class.active]="selectedTabIndex === 1" (click)="onTabChange(1)" type="button">
+            <mat-icon>admin_panel_settings</mat-icon>
+            ADMIN LOGIN
+          </button>
+        </div>
+
+        <div class="login-form">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ selectedTabIndex === 0 ? 'User Email' : 'Admin Email' }}</mat-label>
+            <input matInput type="email" formControlName="email" required>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+          <a routerLink="/auth/forgot-password" class="forgot-password">Forgot Password?</a>
+        </div>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <mat-icon>{{ isLoading ? 'sync' : 'login' }}</mat-icon>
+            {{ isLoading ? 'ACCESSING...' : 'LOGIN' }}
+          </button>
+          <button mat-stroked-button type="button" routerLink="/auth/register">
+            <mat-icon>person_add</mat-icon>
+            CREATE ACCOUNT
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
