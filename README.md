@@ -65,12 +65,43 @@ cd Gaming_Gear_Hub
 
 ```
 Gaming_Project/
-├── Gaming_Gear_Hub/         # Backend (Spring Boot)
+├── Gaming_Gear_Hub/                           # Backend (Spring Boot)
 │   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/springboot/
+│   │   │   │   ├── config/                 # Configuration classes
+│   │   │   │   ├── controller/             # REST controllers
+│   │   │   │   ├── dto/                    # Data Transfer Objects
+│   │   │   │   ├── exception/              # Exception handling
+│   │   │   │   ├── model/                  # Entity classes
+│   │   │   │   ├── repository/             # Data access layer
+│   │   │   │   ├── security/               # Security configuration
+│   │   │   │   ├── service/                # Business logic
+│   │   │   │   └── GamingGearHubApplication.java
+│   │   │   └── resources/
+│   │   │       ├── static/                 # Static resources
+│   │   │       ├── templates/              # Server-side templates
+│   │   │       └── application.properties  # Application configuration
+│   │   └── test/                           # Test files
 │   └── pom.xml
 │
-└── gaming_gear_hub_frontend/ # Frontend (Angular)
+└── gaming_gear_hub_frontend/                # Frontend (Angular)
     ├── src/
+    │   ├── app/
+    │   │   ├── components/             # Reusable UI components
+    │   │   │   ├── header/
+    │   │   │   ├── footer/
+    │   │   │   ├── product-list/
+    │   │   │   └── ...
+    │   │   ├── guards/                 # Route guards
+    │   │   ├── interceptors/           # HTTP interceptors
+    │   │   ├── models/                 # Data models
+    │   │   ├── services/               # API services
+    │   │   ├── shared/                 # Shared modules
+    │   │   └── app.module.ts
+    │   ├── assets/                    # Static assets (images, etc.)
+    │   ├── environments/              # Environment configurations
+    │   └── styles/                    # Global styles
     └── package.json
 ```
 
