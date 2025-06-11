@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Custom variables for the login component
 $primary-color: #3f51b5;
 $secondary-color: #2196f3;
@@ -15,7 +17,7 @@ $mobile-breakpoint: 600px;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 64px); /* Account for navbar height */
-  padding: 4rem 2rem 2rem; /* Add top padding to prevent navbar overlap */
+  padding: 4rem 2rem 2rem;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   background-image: url('https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
   background-size: cover;
@@ -117,7 +119,7 @@ $mobile-breakpoint: 600px;
         margin-bottom: 1.5rem;
 
         mat-checkbox {
-          color: darken($dark-gray, 10%);
+          color: color.adjust($dark-gray, $lightness: -10%);
         }
 
         .forgot-password {
@@ -127,7 +129,7 @@ $mobile-breakpoint: 600px;
           transition: color 0.2s;
 
           &:hover {
-            color: darken($primary-color, 15%);
+            color: color.adjust($primary-color, $lightness: -15%);
             text-decoration: underline;
           }
         }
@@ -159,7 +161,7 @@ $mobile-breakpoint: 600px;
             }
 
             &:disabled {
-              background: lighten($medium-gray, 10%);
+              background: color.adjust($medium-gray, $lightness: 10%);
             }
           }
 
@@ -182,21 +184,21 @@ $mobile-breakpoint: 600px;
 // Responsive adjustments
 @media (max-width: $mobile-breakpoint) {
   .login-container {
-    padding: 5rem 1rem 2rem; /* Adjust padding for mobile */
-    min-height: calc(100vh - 56px); /* Adjust for mobile navbar height */
-    
+    padding: 5rem 1rem 2rem;
+    min-height: calc(100vh - 56px);
+
     .login-card {
       mat-card-header mat-card-title {
         font-size: 1.5rem;
       }
-      
+
       mat-card-content {
         padding: 1.5rem;
-        
+
         .login-type-selector {
           flex-direction: column;
           gap: 0.75rem;
-          
+
           button {
             padding: 0.7rem;
           }

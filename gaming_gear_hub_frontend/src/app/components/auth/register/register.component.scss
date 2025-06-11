@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Custom variables for the register component
 $primary-color: #3f51b5;
 $secondary-color: #2196f3;
@@ -53,26 +55,26 @@ $mobile-breakpoint: 600px;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        
+
         .form-row {
           display: flex;
           gap: 0.5rem;
           margin-bottom: 0.25rem;
-          
+
           @media (max-width: $mobile-breakpoint) {
             flex-direction: column;
             gap: 0.5rem;
             margin-bottom: 0;
           }
-          
+
           .form-group {
             flex: 1;
-            min-width: 0; // Prevents flex items from overflowing
-            
+            min-width: 0;
+
             &.full-width {
               flex: 0 0 100%;
             }
-            
+
             mat-form-field {
               width: 100%;
             }
@@ -132,7 +134,7 @@ $mobile-breakpoint: 600px;
           }
 
           &:disabled {
-            background: lighten($medium-gray, 10%);
+            background: color.adjust($medium-gray, $lightness: 10%);
           }
 
           mat-spinner {
@@ -154,7 +156,7 @@ $mobile-breakpoint: 600px;
             transition: color 0.2s;
 
             &:hover {
-              color: darken($primary-color, 15%);
+              color: color.adjust($primary-color, $lightness: -15%);
               text-decoration: underline;
             }
           }
@@ -167,14 +169,14 @@ $mobile-breakpoint: 600px;
 // Responsive adjustments
 @media (max-width: $mobile-breakpoint) {
   .register-container {
-    padding: 5rem 1rem 2rem; /* Adjust padding for mobile */
-    min-height: calc(100vh - 56px); /* Adjust for mobile navbar height */
-    
+    padding: 5rem 1rem 2rem;
+    min-height: calc(100vh - 56px);
+
     .register-card {
       mat-card-header mat-card-title {
         font-size: 1.5rem;
       }
-      
+
       mat-card-content {
         padding: 1.5rem;
       }

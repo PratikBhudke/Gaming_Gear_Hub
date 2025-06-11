@@ -1,3 +1,5 @@
+@use "sass:color"; // ✅ Add this line at the top
+
 // Colors
 $primary: #3f51b5;
 $text-primary: #212121;
@@ -16,7 +18,7 @@ $line-height: 1.5;
 
 .users-container {
   padding: 2rem;
-  padding-top: 6rem; // Account for fixed header
+  padding-top: 6rem;
   background: $background;
   min-height: 100vh;
   color: $text-primary;
@@ -37,24 +39,24 @@ $line-height: 1.5;
     background: $card-bg;
     border: 1px solid $border;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin: 0 0 1.5rem 0;
     overflow: hidden;
     transition: all 0.2s ease;
-    
+
     &:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
-  
+
   @media (max-width: 768px) {
     padding: 1rem;
     padding-top: 5rem;
-    
+
     .mat-mdc-form-field {
       width: 100%;
     }
-    
+
     .mat-mdc-cell,
     .mat-mdc-header-cell {
       padding: 0.75rem 0.5rem;
@@ -70,7 +72,7 @@ $line-height: 1.5;
   box-shadow: none;
 
   .mat-mdc-header-cell {
-    background: lighten($background, 2%);
+    background: color.adjust($background, $lightness: 2%); // ✅ Fixed line
     color: $text-primary;
     font-weight: 600;
     font-size: 0.8125rem;
@@ -104,7 +106,7 @@ $line-height: 1.5;
       .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
         border-color: $border;
       }
-      
+
       .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
       .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
       .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
@@ -118,7 +120,7 @@ $line-height: 1.5;
       .mat-mdc-select-arrow {
         color: $text-secondary;
       }
-      
+
       .mat-mdc-form-field-underline {
         display: none;
       }

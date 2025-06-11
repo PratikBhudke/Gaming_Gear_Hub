@@ -1,4 +1,7 @@
 import {
+  SharedResizeObserver
+} from "./chunk-V3HGKGEK.js";
+import {
   CdkPortal,
   CdkPortalOutlet,
   TemplatePortal
@@ -8,9 +11,6 @@ import {
   ViewportRuler
 } from "./chunk-U6RJGFPF.js";
 import "./chunk-J4RWTHHO.js";
-import {
-  SharedResizeObserver
-} from "./chunk-V3HGKGEK.js";
 import {
   animate,
   state,
